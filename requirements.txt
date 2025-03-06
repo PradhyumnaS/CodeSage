@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+streamlit
+redis
+google-generativeai
+python-dotenv
+pydantic
+pydantic-settings
+prometheus-client
+aiohttp
