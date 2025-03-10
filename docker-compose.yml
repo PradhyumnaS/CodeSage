@@ -18,6 +18,19 @@ services:
     volumes:
       - ./app:/app/app
 
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+    - "3000:3000"
+    volumes:
+    - grafana_data:/var/lib/grafana
+    - ./grafana/provisioning:/etc/grafana/provisioning
+    - ./grafana/dashboard.json:/var/lib/grafana/dashboards/dashboard.json
+    environment:
+    - GF_SECURITY_ADMIN_PASSWORD=admin  # Change this password in production
+    - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+    - prometheus
   redis:
     image: redis:alpine
     ports:
@@ -48,3 +61,4 @@ services:
 
 volumes:
   redis_data:
+  grafana_data:
