@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import json
 import os
 from datetime import datetime
 
@@ -8,15 +7,15 @@ st.set_page_config(
     page_title="Code Sage",
     page_icon="🔍",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
-API_ENDPOINT = os.environ.get("API_ENDPOINT", "http://localhost:8000")
+API_ENDPOINT = os.environ.get("API_ENDPOINT", "https://codesage-api.onrender.com")
 
 if "history" not in st.session_state:
     st.session_state.history = []
 
-st.title("🔍 Code Sage - Intelligent Code Review & Bug Prediction")
+st.title("🔍 CodeSage - Intelligent Code Review & Bug Prediction")
 st.markdown("""
 This tool uses AI to analyze your code, find bugs, and suggest improvements.
 Just paste your code below, select the language, and let the AI do its work!
@@ -61,8 +60,8 @@ with col1:
     
     with col1a:
         language_options = [
-            "python", "javascript", "typescript", "java", "c", "cpp", "csharp", 
-            "go", "ruby", "php", "rust", "kotlin", "swift", "html", "css"
+            "Python", "Javascript", "Typescript", "Java", "C", "C++", "C#", 
+            "Go", "Ruby", "PHP", "Rust", "Kotlin", "Swift", "HTML", "CSS"
         ]
         language = st.selectbox("Language", options=language_options, 
                                 index=0 if "language" not in st.session_state else 

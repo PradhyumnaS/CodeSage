@@ -5,7 +5,7 @@ import hmac
 import json
 from datetime import datetime
 import time
-from prometheus_client import Counter, Histogram, generate_latest
+from prometheus_client import Counter, Gauge, Histogram, generate_latest
 from prometheus_client import CONTENT_TYPE_LATEST
 from .models import (
     CodeReviewRequest, 
@@ -21,7 +21,7 @@ from .rate_limiter import RateLimiter
 from .cache_manager import CacheManager
 
 app = FastAPI(
-    title="Intelligent Code Review API",
+    title="CodeSage",
     description="An API for automated code review and bug prediction",
     version="1.0.0",
 )
@@ -48,10 +48,12 @@ REVIEW_REQUESTS = Counter('code_review_requests_total', 'Total code review reque
 REVIEW_LATENCY = Histogram('code_review_latency_seconds', 'Latency of code review requests')
 WEBHOOK_REQUESTS = Counter('github_webhook_requests_total', 'Total GitHub webhook requests')
 FEEDBACK_SUBMISSIONS = Counter('feedback_submissions_total', 'Total feedback submissions')
+CACHE_HITS = Counter('cache_hits_total', 'Total cache hits')
+CACHE_MISSES = Counter('cache_misses_total', 'Total cache misses')
 
 @app.get("/")
 async def root():
-    return {"status": "online", "message": "Intelligent Code Review API is running"}
+    return {"status": "online", "message": "CodeSage API is running"}
 
 @app.post("/review", response_model=CodeReviewResponse)
 async def review_code(

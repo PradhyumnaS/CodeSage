@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Settings(BaseSettings):
-    API_TITLE: str = "Intelligent Code Review API"
+    API_TITLE: str = "CodeSage"
     API_VERSION: str = "1.0.0"
     
     GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")

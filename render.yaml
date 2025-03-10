@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: codesage-api
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile.api
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_WEBHOOK_SECRET
+        sync: false
+      - key: REDIS_HOST
+        fromService:
+          name: codesage-redis
+          type: redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: codesage-redis
+          type: redis
+          property: port
+      - key: REDIS_PASSWORD
+        fromService:
+          name: codesage-redis
+          type: redis
+          property: password
+
+  - type: web
+    name: codesage-streamlit
+    env: docker
+    dockerfilePath: Dockerfile.streamlit
+    plan: free
+    envVars:
+      - key: API_ENDPOINT
+        value: https://codesage-api.onrender.com
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PORT
+        value: 8501
+
+  - type: redis
+    name: codesage-redis
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
+    plan: free

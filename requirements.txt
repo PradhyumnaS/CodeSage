@@ -8,3 +8,7 @@ pydantic
 pydantic-settings
 prometheus-client
 aiohttp
+pytest
+httpx
+pytest-cov
+flake8
