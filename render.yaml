@@ -61,7 +61,3 @@ services:
       - key: GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH
         value: /var/lib/grafana/dashboards/dashboard.json
     healthCheckPath: /api/health
-    disk:
-      name: grafana-data
-      mountPath: /var/lib/grafana
-      sizeGB: 1

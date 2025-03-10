@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from google.api_core import retry
+from google.api_core import retry_async
 import uuid
 import json
 from typing import Optional
@@ -21,7 +21,7 @@ class LLMService:
             logger.error(f"Failed to initialize Gemini AI client: {e}")
             raise
     
-    @retry.Retry(predicate=retry.if_exception_type(Exception))
+    @retry_async.AsyncRetry(predicate=retry_async.if_exception_type(Exception))
     async def review_code(
         self,
         code: str,

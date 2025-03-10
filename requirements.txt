@@ -12,3 +12,6 @@ pytest
 httpx
 pytest-cov
 flake8
+pytest-asyncio
+black
+flake8
