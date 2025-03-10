@@ -21,11 +21,6 @@ services:
           name: codesage-redis
           type: redis
           property: port
-      - key: REDIS_PASSWORD
-        fromService:
-          name: codesage-redis
-          type: redis
-          property: password
 
   - type: web
     name: codesage-streamlit
