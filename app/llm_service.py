@@ -22,6 +22,7 @@ class LLMService:
             raise
     
     @retry_async.AsyncRetry(predicate=retry_async.if_exception_type(Exception))
+
     async def review_code(
         self,
         code: str,
@@ -35,7 +36,7 @@ class LLMService:
                 code=code
             )
             
-            response = self.model.generate_content(prompt)
+            response = await self.model.generate_content_async(prompt)
             
             review_text = response.text
             

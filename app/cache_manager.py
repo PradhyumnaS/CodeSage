@@ -30,7 +30,7 @@ class CacheManager:
             return False
             
         try:
-            response_json = json.dumps(response.dict())
+            response_json = json.dumps(response.model_dump())
             result = self.redis_client.setex(f"review:{key}", self.ttl, response_json)
             return result
         except Exception as e:
@@ -57,7 +57,7 @@ class CacheManager:
             
         try:
             feedback_key = f"feedback:{feedback.request_id}"
-            feedback_json = json.dumps(feedback.dict())
+            feedback_json = json.dumps(feedback.model_dump())
             result = self.redis_client.set(feedback_key, feedback_json)
             
             self.redis_client.lpush("all_feedback", feedback_json)

@@ -1,0 +1,11 @@
+FROM grafana/grafana:latest
+
+COPY grafana/provisioning /etc/grafana/provisioning
+COPY grafana/dashboard.json /var/lib/grafana/dashboards/dashboard.json
+
+ENV GF_INSTALL_PLUGINS=grafana-piechart-panel
+ENV GF_SECURITY_ALLOW_EMBEDDING=true
+ENV GF_AUTH_ANONYMOUS_ENABLED=true
+ENV GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/dashboard.json
+
+EXPOSE 3000

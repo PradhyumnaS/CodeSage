@@ -46,6 +46,7 @@ services:
     name: codesage-grafana
     env: docker
     plan: free
+    dockerfilePath: Dockerfile.grafana 
     dockerCommand: grafana-server --homepath=/usr/share/grafana --config=/etc/grafana/grafana.ini
     envVars:
       - key: GF_SECURITY_ADMIN_PASSWORD

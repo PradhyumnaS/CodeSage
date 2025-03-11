@@ -123,7 +123,7 @@ class GitHubService:
                 files=files_content
             )
             
-            review_response = await llm_service.model.generate_content(review_prompt)
+            review_response = await llm_service.model.generate_content_async(review_prompt)
             review_text = review_response.text
             
             comment = (
